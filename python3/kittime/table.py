@@ -31,13 +31,21 @@ class Table:
     def process_seq(self, seq: str):
         for c in seq:
             self.process(c)
-            
+
     def process_new_seq(self, seq: str):
         self._reset()
         for c in seq:
             self.process(c)
 
     def process(self, char: str):
+        if self.input != "":
+            match char:
+                case " ":
+                    char = '1'
+                case ";":
+                    char = '2'
+                case "'":
+                    char = '3'
         self._push_input(char)
 
     def pop_input(self) -> str:
@@ -128,75 +136,15 @@ class Table:
         self.candidates = self._extract(self.input)[:]
 
     def _select(self, char: str):
-        # what's the hell
-        match char:
-            case " ":
-                if len(self.candidates) >= 1:
-                    self._buffer += self.candidates[0]
-                else:
-                    return False
-            case ";":
-                if len(self.candidates) >= 2:
-                    self._buffer += self.candidates[1]
-                else:
-                    return False
-            case "'":
-                if len(self.candidates) >= 3:
-                    self._buffer += self.candidates[2]
-                else:
-                    return False
-            case "1":
-                if len(self.candidates) >= 1:
-                    self._buffer += self.candidates[0]
-                else:
-                    return False
-            case "2":
-                if len(self.candidates) >= 2:
-                    self._buffer += self.candidates[1]
-                else:
-                    return False
-            case "3":
-                if len(self.candidates) >= 3:
-                    self._buffer += self.candidates[2]
-                else:
-                    return False
-            case "4":
-                if len(self.candidates) >= 4:
-                    self._buffer += self.candidates[3]
-                else:
-                    return False
-            case "5":
-                if len(self.candidates) >= 5:
-                    self._buffer += self.candidates[4]
-                else:
-                    return False
-            case "6":
-                if len(self.candidates) >= 6:
-                    self._buffer += self.candidates[5]
-                else:
-                    return False
-            case "7":
-                if len(self.candidates) >= 7:
-                    self._buffer += self.candidates[6]
-                else:
-                    return False
-            case "8":
-                if len(self.candidates) >= 8:
-                    self._buffer += self.candidates[7]
-                else:
-                    return False
-            case "9":
-                if len(self.candidates) >= 9:
-                    self._buffer += self.candidates[8]
-                else:
-                    return False
-            case "0":
-                if len(self.candidates) >= 10:
-                    self._buffer += self.candidates[9]
-                else:
-                    return False
-            case _:
+        if len(char) > 1:
+            return False
+        try:
+            index = int(char)
+            if len(self.candidates) >= index:
+                self._buffer += self.candidates[index - 1]
+                self.input = ""
+                return True
+            else:
                 return False
-
-        self.input = ""
-        return True
+        except:
+            return False
