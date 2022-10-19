@@ -2,6 +2,8 @@
 
 `nvim-cmp` source for typing by table.
 
+![preview](https://user-images.githubusercontent.com/38760833/196694640-6bf553f9-3545-4689-9c5d-70892cee9fc1.png)
+
 ## Setup
 
 ``` lua
