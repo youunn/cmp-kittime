@@ -30,3 +30,7 @@ require('cmp').setup {
 
 vim.keymap.set('i', '<c-s>', require('cmp_kittime.utils').toggle)
 ```
+
+## Note
+
+`nvim-cmp` calculate the offset and score in `cursor_line`, so if an entry appears on current line, it's ignored in completion menu.

@@ -1,5 +1,5 @@
 local M = {}
-local table = require 'cmp_kittime.table'
+local kittime = require 'cmp_kittime.state'
 
 function M.compare_weight(entry1, entry2)
     local item1 = entry1:get_completion_item()
@@ -16,7 +16,7 @@ function M.compare_weight(entry1, entry2)
 end
 
 function M.toggle()
-    table.status = not table.status
+    kittime.status = not kittime.status
 end
 
 return M
