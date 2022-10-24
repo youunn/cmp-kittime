@@ -20,10 +20,11 @@ local function replace(text, length, back)
 end
 
 function M.process_seq(input, d)
-    vim.cmd([[python <<EOF
-table.process_new_seq("""]] .. string.gsub(input, '"', '\\"') .. [[""")
-EOF]]
-    )
+    local escape = input
+    escape = string.gsub(escape, '\\', '\\\\')
+    escape = string.gsub(escape, '"', '\\"')
+    vim.cmd([[python table.process_new_seq("""]] .. escape .. [[""")]])
+
 
     local buffer = vim.fn.pyeval 'table.pop_input()'
 
